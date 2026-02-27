@@ -1,0 +1,33 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Fleet-Master-API",
+    "description": "A comprehensive Fleet and Asset Management System designed to track vehicles, drones, and equipment. This API manages user authentication via OAuth, tracks detailed maintenance records, and monitors real-time deployment locations. Developed for the CSE341 Team Project.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Operations for user management and OAuth profiles"
+    },
+    {
+      "name": "Assets",
+      "description": "CRUD operations for vehicles, drones, and equipment"
+    },
+    {
+      "name": "Maintenance",
+      "description": "Tracking service history and repair logs"
+    },
+    {
+      "name": "Locations",
+      "description": "Managing deployment sites and storage hubs"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {}
+}
