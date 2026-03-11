@@ -19,5 +19,5 @@ app.use('/', require('./routes'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}. Docs at http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}. Docs at http://localhost:${PORT}/api-docs/`);
 });
