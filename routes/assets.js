@@ -3,8 +3,8 @@ const router = express.Router();
 const assetsController = require('../controllers/assetscontroller')
 
 // Routes for assets
-router.get('/', assetsController.getAll);
-
+router.get('/', assetsController.getAllAssets);
+    
 router.get('/:id', assetsController.getSingle);
 
 router.post('/', assetsController.createAsset);
