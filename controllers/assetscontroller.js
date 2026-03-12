@@ -1,7 +1,7 @@
 const Users = require('../models/users');
 
 
-const getAllAssets = async (req, res, next) => {
+const getAllAssets = async (req, res) => {
     // #swagger.tags = ['Assets']
     // #swagger.description = 'Retrieve all assets from the database.'
     /* #swagger.responses[200] = {
