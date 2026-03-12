@@ -1,0 +1,16 @@
+const express = require('express');
+const router = express.Router();
+const assetsController = require('../controllers/assetscontroller')
+
+// Routes for assets
+router.get('/', assetsController.getAll);
+
+router.get('/:id', assetsController.getSingle);
+
+router.post('/', assetsController.createAsset);
+
+router.put('/:id', assetsController.updateAsset);
+
+router.delete('/:id', assetsController.deleteAsset);
+
+module.exports = router;
