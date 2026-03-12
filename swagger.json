@@ -223,6 +223,253 @@
         }
       }
     },
+    "/assets/": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "description": "Retrieve all assets from the database.",
+        "responses": {
+          "200": {
+            "description": "Array of assets retrieved successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "example": "Drone"
+                  },
+                  "model": {
+                    "type": "string",
+                    "example": "DJI Mavic Air 2"
+                  },
+                  "serialNumber": {
+                    "type": "string",
+                    "example": "SN123456789"
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Active"
+                  },
+                  "purchaseDate": {
+                    "type": "string",
+                    "example": "2024-01-15T00:00:00Z"
+                  },
+                  "assignedTo": {
+                    "type": "string",
+                    "example": "60d0fe4f5311236168a109ca"
+                  },
+                  "currentLocationId": {
+                    "type": "string",
+                    "example": "60d0fe4f5311236168a109cb"
+                  },
+                  "specs": {
+                    "type": "object",
+                    "properties": {
+                      "weight": {
+                        "type": "number",
+                        "example": 570
+                      },
+                      "dimensions": {
+                        "type": "string",
+                        "example": "183x253x77 mm"
+                      },
+                      "batteryCapacity": {
+                        "type": "string",
+                        "example": "3500 mAh"
+                      },
+                      "powerSource": {
+                        "type": "string",
+                        "example": "LiPo"
+                      }
+                    }
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Assets"
+        ],
+        "description": "Create a new asset.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Asset information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "Drone"
+                },
+                "model": {
+                  "type": "string",
+                  "example": "DJI Mavic Air 2"
+                },
+                "serialNumber": {
+                  "type": "string",
+                  "example": "SN123456789"
+                },
+                "status": {
+                  "type": "string",
+                  "example": "Active"
+                },
+                "purchaseDate": {
+                  "type": "string",
+                  "example": "2024-01-15T00:00:00Z"
+                },
+                "assignedTo": {
+                  "type": "string",
+                  "example": "60d0fe4f5311236168a109ca"
+                },
+                "currentLocationId": {
+                  "type": "string",
+                  "example": "60d0fe4f5311236168a109cb"
+                },
+                "specs": {
+                  "type": "object",
+                  "properties": {
+                    "weight": {
+                      "type": "number",
+                      "example": 570
+                    },
+                    "dimensions": {
+                      "type": "string",
+                      "example": "183x253x77 mm"
+                    },
+                    "batteryCapacity": {
+                      "type": "string",
+                      "example": "3500 mAh"
+                    },
+                    "powerSource": {
+                      "type": "string",
+                      "example": "LiPo"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/assets/{id}": {
+      "get": {
+        "tags": [
+          "Assets"
+        ],
+        "description": "Get a single asset by its MongoDB ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Asset ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Assets"
+        ],
+        "description": "Update an existing asset by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Asset ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated asset data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "example": "Maintenance"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Assets"
+        ],
+        "description": "Delete an asset by ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Asset ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/locations/": {
       "get": {
         "description": "",
