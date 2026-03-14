@@ -5,4 +5,6 @@ router.use('/assets', require('./assets'));
 // router.use('/maintenancehistory', require('./maintenancehistory'));
 router.use('/locations', require('./locations'));
 
+router.use('/auth', require('./auth'));
+
 module.exports = router;

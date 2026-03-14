@@ -3,6 +3,8 @@ const cors = require('cors');
 const connectDB = require('./config/db');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
+const session = require('express-session');
+const passport = require('./config/passport');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -13,6 +15,16 @@ connectDB();
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use('/', require('./routes'));
