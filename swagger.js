@@ -6,7 +6,7 @@ const doc = {
     description: 'A comprehensive Fleet and Asset Management System designed to track vehicles, drones, and equipment. This API manages user authentication via OAuth, tracks detailed maintenance records, and monitors real-time deployment locations. Developed for the CSE341 Team Project.',
   },
   host: 'fleet-master-api-udiw.onrender.com',
-  schemes: ['http', 'https'],
+  schemes: ['https'],
   tags: [
     { name: 'Users', description: 'Operations for user management and OAuth profiles' },
     { name: 'Assets', description: 'CRUD operations for vehicles, drones, and equipment' },
