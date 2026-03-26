@@ -63,8 +63,36 @@ const createMaintenanceHistory = async (req, res) => {
     }
 };
 
+const updateMaintenanceHistory = async (req, res) => {
+    // #swagger.tags = ['Maintenance History']
+    // #swagger.description = 'Update an existing maintenance history record by its MongoDB ID.'
+    /* #swagger.parameters['id'] = { description: 'Maintenance history record ID' }
+        #swagger.parameters['body'] = {
+            in: 'body',
+            description: 'Updated maintenance history information',
+            required: true,
+            schema: {
+                description: 'Updated description of maintenance performed.',
+                cost: 200
+            }
+    } */
+    try {
+        const updatedRecord = await maintenanceHistory.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { new: true }
+        );
+        if (!updatedRecord) return res.status(404).json({ message: "Record not found" });
+        res.status(200).json(updatedRecord);
+    } catch (err) {
+        res.status(500).json({ message: "Error updating maintenance history record", error: err.message });
+    }
+};
+
+
 module.exports = {
     getAllMaintenanceHistory,
     getSingleMaintenanceHistory,
-    createMaintenanceHistory
+    createMaintenanceHistory,
+    updateMaintenanceHistory
 };
