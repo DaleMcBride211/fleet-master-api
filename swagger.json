@@ -471,6 +471,9 @@
     },
     "/locations/": {
       "get": {
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "responses": {
           "200": {
@@ -482,6 +485,9 @@
         }
       },
       "post": {
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "responses": {
           "201": {
@@ -496,8 +502,12 @@
         }
       }
     },
+
     "/locations/{id}": {
       "get": {
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "parameters": [
           {
@@ -520,6 +530,9 @@
         }
       },
       "put": {
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "parameters": [
           {
@@ -542,6 +555,9 @@
         }
       },
       "delete": {
+        "tags": [
+          "Locations"
+        ],
         "description": "",
         "parameters": [
           {
