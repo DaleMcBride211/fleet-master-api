@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const assetsController = require('../controllers/assetscontroller')
+const {assetValidationRules} = require('../middleware/validation');
 
 // Routes for assets
-router.get('/', assetsController.getAllAssets);
+router.get('/', ...assetValidationRules.getallAssets, assetsController.getAllAssets);
     
-router.get('/:id', assetsController.getSingleAsset);
+router.get('/:id', ...assetValidationRules.getAssetById, assetsController.getSingleAsset);
 
-router.post('/', assetsController.createAsset);
+router.post('/', ...assetValidationRules.createAsset, assetsController.createAsset);
 
-router.put('/:id', assetsController.updateAsset);
+router.put('/:id', ...assetValidationRules.UpdateAsset, assetsController.updateAsset);
 
-router.delete('/:id', assetsController.deleteAsset);
+router.delete('/:id', ...assetValidationRules.deleteAsset, assetsController.deleteAsset);
 
 module.exports = router;

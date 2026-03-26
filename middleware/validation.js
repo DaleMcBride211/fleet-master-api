@@ -57,5 +57,10 @@ const assetValidationRules = {
         param('id').isInt().withMessage('ID must be an integer'),
         handleValidationErrors
     ]
+
+};
+
+module.exports = {
+    assetValidationRules
 }
 
