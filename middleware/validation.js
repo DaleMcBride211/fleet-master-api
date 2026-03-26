@@ -1,0 +1,40 @@
+const {body, param, validationResult} = require('express-validator');
+
+//Middleware to handle validation errors
+const handleValidationErrors = (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({errors: errors.array()});
+    }
+    next();
+};
+
+// Assets Validation Rules
+
+const assetValidationRules = {
+
+    getallAssets: [
+        handleValidationErrors
+    ],
+
+    getAssetById: [
+        param('id').isInt().withMessage('ID must be an integer'),
+        handleValidationErrors
+    ],
+    createAsset: [
+        body('type').isIn(['Drone', 'Vehicle', 'Equip']).withMessage('Type must be Drone, Vehicle, or Equip'),
+        body('model').notEmpty().withMessage('Model is required'),
+        body('serialNumber').notEmpty().withMessage('Serial Number is required'),
+        body('status').optional().isIn(['Active', 'Maintenance', 'Deployed']).withMessage('Status must be Active, Maintenance, or Deployed'),
+        body('purchaseDate').optional().isISO8601().toDate().withMessage('Purchase Date must be a valid date'),
+        body('assignedTo').optional().isMongoId().withMessage('Assigned To must be a valid user ID'),
+        body('currentLocationId').optional().isMongoId().withMessage('Current Location ID must be a valid location ID'),
+        body('specs').optional().isObject().withMessage('Specs must be an object'),
+        body('specs.weight').optional().isNumeric().withMessage('Specs weight must be a number'),
+        body('specs.dimensions').optional().isString().withMessage('Specs dimensions must be a string'),
+        body('specs.batteryCapacity').optional().isString().withMessage('Specs battery capacity must be a string'),
+        body('specs.powerSource').optional().isString().withMessage('Specs power source must be a string'),
+        handleValidationErrors
+    ],
+}
+
