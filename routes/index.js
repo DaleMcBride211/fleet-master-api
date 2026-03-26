@@ -1,10 +1,12 @@
 const router = require('express').Router();
-
-router.use('/users', require('./users'));
-router.use('/assets', require('./assets'));
-router.use('/maintenancehistory', require('./maintenancehistory'));
-router.use('/locations', require('./locations'));
+const { isAuthenticated } = require('../middleware/authentication');
 
 router.use('/auth', require('./auth'));
+
+router.use('/users', isAuthenticated, require('./users'));
+router.use('/assets', isAuthenticated, require('./assets'));
+router.use('/maintenancehistory', isAuthenticated, require('./maintenancehistory'));
+router.use('/locations', isAuthenticated, require('./locations'));
+
 
 module.exports = router;
