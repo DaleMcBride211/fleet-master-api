@@ -8,7 +8,7 @@ router.get('/', maintenanceHistoryController.getAllMaintenanceHistory);
     
 router.get('/:id', maintenanceHistoryController.getSingleMaintenanceHistory);
 
-//router.post('/', maintenanceHistoryController.createMaintenanceHistory);
+router.post('/', maintenanceHistoryController.createMaintenanceHistory);
 
 //router.put('/:id', maintenanceHistoryController.updateMaintenanceHistory);
 
