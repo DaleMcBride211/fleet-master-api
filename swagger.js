@@ -10,7 +10,7 @@ const doc = {
   tags: [
     { name: 'Users', description: 'Operations for user management and OAuth profiles' },
     { name: 'Assets', description: 'CRUD operations for vehicles, drones, and equipment' },
-    { name: 'Maintenance', description: 'Tracking service history and repair logs' },
+    { name: 'Maintenance History', description: 'Tracking service history and repair logs' },
     { name: 'Locations', description: 'Managing deployment sites and storage hubs' }
   ],
 };

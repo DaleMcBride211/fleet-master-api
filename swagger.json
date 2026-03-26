@@ -17,7 +17,7 @@
       "description": "CRUD operations for vehicles, drones, and equipment"
     },
     {
-      "name": "Maintenance",
+      "name": "Maintenance History",
       "description": "Tracking service history and repair logs"
     },
     {
@@ -469,11 +469,212 @@
         }
       }
     },
-    "/locations/": {
+    "/maintenancehistory/": {
       "get": {
         "tags": [
-          "Locations"
+          "Maintenance History"
         ],
+        "description": "Retrieve all maintenance history records from the database.",
+        "responses": {
+          "200": {
+            "description": "Array of maintenance history records retrieved successfully.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "assetId": {
+                    "type": "string",
+                    "example": "60d0fe4f5311236168a109ca"
+                  },
+                  "serviceDate": {
+                    "type": "string",
+                    "example": "2024-02-20T00:00:00Z"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Replaced propellers and updated firmware."
+                  },
+                  "cost": {
+                    "type": "number",
+                    "example": 150
+                  },
+                  "performedBy": {
+                    "type": "string",
+                    "example": "John Doe"
+                  },
+                  "nextServiceDue": {
+                    "type": "string",
+                    "example": "2024-08-20T00:00:00Z"
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Maintenance History"
+        ],
+        "description": "Create a new maintenance history record.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Maintenance history information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "assetId": {
+                  "type": "string",
+                  "example": "60d0fe4f5311236168a109ca"
+                },
+                "serviceDate": {
+                  "type": "string",
+                  "example": "2024-02-20T00:00:00Z"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Replaced propellers and updated firmware."
+                },
+                "cost": {
+                  "type": "number",
+                  "example": 150
+                },
+                "performedBy": {
+                  "type": "string",
+                  "example": "John Doe"
+                },
+                "nextServiceDue": {
+                  "type": "string",
+                  "example": "2024-08-20T00:00:00Z"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/maintenancehistory/{id}": {
+      "get": {
+        "tags": [
+          "Maintenance History"
+        ],
+        "description": "Get a single maintenance history record by its MongoDB ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Maintenance history record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Maintenance History"
+        ],
+        "description": "Update an existing maintenance history record by its MongoDB ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Maintenance history record ID"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated maintenance history information",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "example": "Updated description of maintenance performed."
+                },
+                "cost": {
+                  "type": "number",
+                  "example": 200
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Maintenance History"
+        ],
+        "description": "Delete a maintenance history record by its MongoDB ID.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Maintenance history record ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/locations/": {
+      "get": {
         "description": "",
         "responses": {
           "200": {
@@ -485,9 +686,6 @@
         }
       },
       "post": {
-        "tags": [
-          "Locations"
-        ],
         "description": "",
         "responses": {
           "201": {
@@ -502,12 +700,8 @@
         }
       }
     },
-
     "/locations/{id}": {
       "get": {
-        "tags": [
-          "Locations"
-        ],
         "description": "",
         "parameters": [
           {
@@ -530,9 +724,6 @@
         }
       },
       "put": {
-        "tags": [
-          "Locations"
-        ],
         "description": "",
         "parameters": [
           {
@@ -555,9 +746,6 @@
         }
       },
       "delete": {
-        "tags": [
-          "Locations"
-        ],
         "description": "",
         "parameters": [
           {
@@ -576,6 +764,52 @@
           },
           "500": {
             "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/github": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/github/callback": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
       }
