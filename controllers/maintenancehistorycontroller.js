@@ -22,6 +22,20 @@ const getAllMaintenanceHistory = async (req, res) => {
     }
 };
 
+const getSingleMaintenanceHistory = async (req, res) => {
+    // #swagger.tags = ['Maintenance History']
+    // #swagger.description = 'Get a single maintenance history record by its MongoDB ID.'
+    /* #swagger.parameters['id'] = { description: 'Maintenance history record ID' } */
+    try {
+        const record = await maintenanceHistory.findById(req.params.id);
+        if (!record) return res.status(404).json({ message: "Record not found" });
+        res.status(200).json(record);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    } 
+};
+
 module.exports = {
-    getAllMaintenanceHistory
+    getAllMaintenanceHistory,
+    getSingleMaintenanceHistory
 };

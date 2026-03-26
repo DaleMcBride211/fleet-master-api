@@ -6,7 +6,7 @@ const maintenanceHistoryController = require('../controllers/maintenancehistoryc
 
 router.get('/', maintenanceHistoryController.getAllMaintenanceHistory);
     
-//router.get('/:id', maintenanceHistoryController.getSingleMaintenanceHistory);
+router.get('/:id', maintenanceHistoryController.getSingleMaintenanceHistory);
 
 //router.post('/', maintenanceHistoryController.createMaintenanceHistory);
 
