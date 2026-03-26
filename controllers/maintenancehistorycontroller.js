@@ -89,10 +89,23 @@ const updateMaintenanceHistory = async (req, res) => {
     }
 };
 
+const deleteMaintenanceHistory = async (req, res) => {
+    // #swagger.tags = ['Maintenance History']
+    // #swagger.description = 'Delete a maintenance history record by its MongoDB ID.'
+    /* #swagger.parameters['id'] = { description: 'Maintenance history record ID' } */
+    try {
+        const deleted = await maintenanceHistory.findByIdAndDelete(req.params.id);
+        if (!deleted) return res.status(404).json({ message: "Record not found" });
+        res.status(200).json({ message: "Record deleted successfully" });
+    } catch (err) {
+        res.status(500).json({ message: "Error deleting maintenance history record", error: err.message });
+    }
+};
 
 module.exports = {
     getAllMaintenanceHistory,
     getSingleMaintenanceHistory,
     createMaintenanceHistory,
-    updateMaintenanceHistory
+    updateMaintenanceHistory,
+    deleteMaintenanceHistory
 };

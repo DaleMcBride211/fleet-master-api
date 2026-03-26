@@ -10,8 +10,8 @@ router.get('/:id', maintenanceHistoryController.getSingleMaintenanceHistory);
 
 router.post('/', maintenanceHistoryController.createMaintenanceHistory);
 
-//router.put('/:id', maintenanceHistoryController.updateMaintenanceHistory);
+router.put('/:id', maintenanceHistoryController.updateMaintenanceHistory);
 
-//router.delete('/:id', maintenanceHistoryController.deleteMaintenanceHistory);
+router.delete('/:id', maintenanceHistoryController.deleteMaintenanceHistory);
 
 module.exports = router;
