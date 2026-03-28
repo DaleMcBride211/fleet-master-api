@@ -21,7 +21,7 @@ const app = require('../server');
 
 describe('Assets API Tests', () => {
     
-    test ('Type must be Drone, Vehicle, or Equip', async () => {
+    test ('Type must be Drone, Vehicle, or Equip when Creating an Asset', async () => {
         const res = await request(app)
             .post('/assets')
             .send({
@@ -34,7 +34,7 @@ describe('Assets API Tests', () => {
         expect(res.body.errors[0].msg).toBe('Type must be Drone, Vehicle, or Equip');
     });
 
-    test('Model is required', async () => {
+    test('Model is required when Creating an Asset', async () => {
         const res = await request(app)
             .post('/assets')
             .send({
@@ -46,7 +46,8 @@ describe('Assets API Tests', () => {
         expect(res.body.errors[0].msg).toBe('Model is required');
     });
 
-    test('Serial Number is required', async () => {
+
+    test('Serial Number is required when Updating an Asset', async () => {
         const res = await request(app)
             .put('/assets/123')
             .send({
