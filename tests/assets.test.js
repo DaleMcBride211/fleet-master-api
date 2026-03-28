@@ -46,4 +46,15 @@ describe('Assets API Tests', () => {
         expect(res.body.errors[0].msg).toBe('Model is required');
     });
 
+    test('Serial Number is required', async () => {
+        const res = await request(app)
+            .put('/assets/123')
+            .send({
+                type: 'Drone',
+                model: 'Test Model'
+            });
+        expect(res.statusCode).toBe(400);
+        expect(Array.isArray(res.body.errors)).toBe(true);
+        expect(res.body.errors[0].msg).toBe('Serial Number is required');
+    });
 });
