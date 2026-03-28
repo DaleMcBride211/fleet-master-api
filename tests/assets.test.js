@@ -17,11 +17,33 @@ jest.mock('../middleware/authentication', () => ({
     isAuthenticated: (req, res, next) => next()
 }));
 
-// Mock assets route
-jest.mock('../routes/assets', () => {
-    const express = require('express');
-    return express.Router();
-});
-
 const app = require('../server');
 
+describe('Assets API Tests', () => {
+    
+    test ('Type must be Drone, Vehicle, or Equip', async () => {
+        const res = await request(app)
+            .post('/assets')
+            .send({
+                type: 'InvalidType',
+                model: 'Test Model',
+                serialNumber: '12345'
+            });
+        expect(res.statusCode).toBe(400);
+        expect(Array.isArray(res.body.errors)).toBe(true);
+        expect(res.body.errors[0].msg).toBe('Type must be Drone, Vehicle, or Equip');
+    });
+
+    test('Model is required', async () => {
+        const res = await request(app)
+            .post('/assets')
+            .send({
+                type: 'Drone',
+                serialNumber: '12345'
+            });
+        expect(res.statusCode).toBe(400);
+        expect(Array.isArray(res.body.errors)).toBe(true);
+        expect(res.body.errors[0].msg).toBe('Model is required');
+    });
+
+});
