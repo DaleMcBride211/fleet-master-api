@@ -58,4 +58,20 @@ describe('Assets API Tests', () => {
         expect(Array.isArray(res.body.errors)).toBe(true);
         expect(res.body.errors[0].msg).toBe('Serial Number is required');
     });
+
+    test ('Status must be Active, Maintenance, or Deployed when Updating an Asset', async () => {
+        const res = await request(app)
+            .put('/assets/123')
+            .send({
+                type: 'Drone',
+                model: 'Test Model',
+                serialNumber: '12345',
+                status: 'InvalidStatus'
+            });
+        expect(res.statusCode).toBe(400);
+        expect(Array.isArray(res.body.errors)).toBe(true);
+        expect(res.body.errors[0].msg).toBe('Status must be Active, Maintenance, or Deployed');
+    });
+    
 });
+
