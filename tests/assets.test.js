@@ -20,6 +20,14 @@ jest.mock('../middleware/authentication', () => ({
 const app = require('../server');
 
 describe('Assets API Tests', () => {
+
+    test('Get asset by ID with non-integer ID should return validation error', async () => {
+        const res = await request(app)
+            .get('/assets/invalidId');
+        expect(res.statusCode).toBe(400);
+        expect(Array.isArray(res.body.errors)).toBe(true);
+        expect(res.body.errors[0].msg).toBe('ID must be an integer');
+    });
     
     test ('Type must be Drone, Vehicle, or Equip when Creating an Asset', async () => {
         const res = await request(app)
@@ -72,6 +80,14 @@ describe('Assets API Tests', () => {
         expect(Array.isArray(res.body.errors)).toBe(true);
         expect(res.body.errors[0].msg).toBe('Status must be Active, Maintenance, or Deployed');
     });
-    
+
+    test ('Delete Asset with non-integer ID should return validation error', async () => {
+        const res = await request(app)
+            .delete('/assets/invalidId');
+        expect(res.statusCode).toBe(400);
+        expect(Array.isArray(res.body.errors)).toBe(true);
+        expect(res.body.errors[0].msg).toBe('ID must be an integer');
+    });
+
 });
 
