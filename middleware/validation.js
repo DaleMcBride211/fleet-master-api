@@ -60,7 +60,34 @@ const assetValidationRules = {
 
 };
 
+const userValidationRules = {
+    getAllUsers: [
+        handleValidationErrors
+    ],
+    getSingleUser: [
+        param('id').isMongoId().withMessage('Invalid User ID format (must be a MongoID)'),
+        handleValidationErrors
+    ],
+    createUser: [
+        body('name').trim().notEmpty().withMessage('Name is required'),
+        body('email').isEmail().withMessage('Valid email is required').normalizeEmail(),
+        body('role').optional().isIn(['Admin', 'Operator', 'Viewer']).withMessage('Invalid role'),
+        body('oAuthId').notEmpty().withMessage('oAuthId is required'),
+        handleValidationErrors
+    ],
+    updateUser: [
+        param('id').isMongoId().withMessage('Invalid User ID format'),
+        body('email').optional().isEmail().normalizeEmail(),
+        handleValidationErrors
+    ],
+    deleteUser: [
+        param('id').isMongoId().withMessage('Invalid User ID format'),
+        handleValidationErrors
+    ]
+};
+
 module.exports = {
-    assetValidationRules
+    assetValidationRules,
+    userValidationRules
 }
 
