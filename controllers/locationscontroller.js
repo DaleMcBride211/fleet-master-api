@@ -27,11 +27,17 @@ const createLocation = async (req, res) => {
 
         const newLocation = new Locations(req.body);
         const savedLocation = await newLocation.save();
-        res.status(201).json(savedLocation);
+
+        return res.status(201).json(savedLocation);
+
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        if (err.name === 'ValidationError') {
+            return res.status(400).json({ message: err.message });
+        }
+
+        return res.status(500).json({ message: err.message });
     }
-}
+};
 
 const updateLocation = async (req, res) => {
     try {
