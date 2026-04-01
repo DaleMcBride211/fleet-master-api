@@ -4,8 +4,8 @@ const connectDB = require('./config/db');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const session = require('express-session');
-const passport = require('./config/passport');
 require('dotenv').config(); // Ensure your env variables are loaded
+const passport = require('./config/passport');
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -51,8 +51,7 @@ app.use('/', require('./routes'));
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // 6. Start Server
-// 6. Start Server ONLY if not testing
-if (process.env.NODE_ENV !== 'test') {
+if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}. Docs at http://localhost:${PORT}/api-docs/`);
   });
