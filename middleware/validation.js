@@ -91,3 +91,55 @@ module.exports = {
     userValidationRules
 }
 
+// Locations Validation Rules
+
+const locationValidationRules = {
+
+    getAllLocations: [
+        handleValidationErrors
+    ],
+
+    getLocationById: [
+        param('id').isMongoId().withMessage('ID must be a valid Mongo ID'),
+        handleValidationErrors
+    ],
+
+    createLocation: [
+        body('name').notEmpty().withMessage('Name is required'),
+
+        body('coordinates').notEmpty().withMessage('Coordinates are required'),
+        body('coordinates.lat').isNumeric().withMessage('Latitude must be a number'),
+        body('coordinates.lng').isNumeric().withMessage('Longitude must be a number'),
+
+        body('address').optional().isString().withMessage('Address must be a string'),
+        body('capacity').optional().isNumeric().withMessage('Capacity must be a number'),
+        body('managerContact').optional().isString().withMessage('Manager Contact must be a string'),
+
+        handleValidationErrors
+    ],
+
+    updateLocation: [
+        param('id').isMongoId().withMessage('ID must be a valid Mongo ID'),
+
+        body('name').optional().notEmpty().withMessage('Name cannot be empty'),
+
+        body('coordinates.lat').optional().isNumeric().withMessage('Latitude must be a number'),
+        body('coordinates.lng').optional().isNumeric().withMessage('Longitude must be a number'),
+
+        body('address').optional().isString().withMessage('Address must be a string'),
+        body('capacity').optional().isNumeric().withMessage('Capacity must be a number'),
+        body('managerContact').optional().isString().withMessage('Manager Contact must be a string'),
+
+        handleValidationErrors
+    ],
+
+    deleteLocation: [
+        param('id').isMongoId().withMessage('ID must be a valid Mongo ID'),
+        handleValidationErrors
+    ]
+
+};
+
+module.exports = {
+    locationValidationRules
+};
