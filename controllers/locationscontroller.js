@@ -1,3 +1,4 @@
+const { validationResult } = require("express-validator");
 const Locations = require('../models/locations');
 
 const getAll = async (req, res) => {

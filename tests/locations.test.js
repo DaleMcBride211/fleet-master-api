@@ -40,14 +40,12 @@ const app = require('../server');
 
 describe('Locations API Tests', () => {
 
-    test('Should allow missing name (current behavior)', async () => {
+    test('Should FAIL when name is missing (current behavior)', async () => {
         const res = await request(app)
-            .post('/locations')
-            .send({
-                coordinates: { lat: 40, lng: -111 }
-            });
+    .post('/locations')
+    .send({});
 
-        expect(res.statusCode).toBe(201);
+        expect(res.statusCode).toBe(400);
     });
 
     test('Should allow missing coordinates (current behavior)', async () => {
