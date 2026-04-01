@@ -86,11 +86,6 @@ const userValidationRules = {
     ]
 };
 
-module.exports = {
-    assetValidationRules,
-    userValidationRules
-}
-
 // Locations Validation Rules
 
 const locationValidationRules = {
@@ -141,5 +136,7 @@ const locationValidationRules = {
 };
 
 module.exports = {
-    locationValidationRules
+    locationValidationRules,
+    assetValidationRules,
+    userValidationRules
 };
